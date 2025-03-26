@@ -1,0 +1,25 @@
+name: Birthday Bot
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # every day at 8am UTC
+  workflow_dispatch:
+
+jobs:
+  birthday-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install venom-bot
+
+      - name: Run the birthday bot
+        run: node bot.js
